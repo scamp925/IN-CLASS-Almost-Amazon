@@ -10,6 +10,14 @@ const navBar = () => {
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li>
+          <input
+            class="form-control mr-sm-2"
+            id="search"
+            placeholder="Search Book Titles"
+            aria-label="Search"
+          />
+          </li>
             <li class="nav-item active">
               <a class="nav-link" href="#" id="all-books">
                 All Books <span class="sr-only">(current)</span>
@@ -21,13 +29,8 @@ const navBar = () => {
             <li class="nav-item">
               <a class="nav-link" href="#" id="authors">Authors</a>
             </li>
-            <li>
-            <input
-              class="form-control mr-sm-2"
-              id="search"
-              placeholder="Search Book Titles"
-              aria-label="Search"
-            />
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="favAuthors">Favorite Authors</a>
             </li>
           </ul>
           <span class="navbar-text">
