@@ -17,6 +17,17 @@ const viewAuthor = (obj) => {
    </div>
    <div class="text-white ms-5">
     <h5>Books</h5>
+    <div class="card">
+        <img class="card-img-top" src=${obj.bookObject.image} alt=${obj.bookObject.title} style="height: 400px;">
+        <div class="card-body" style="height: 180px;">
+          <h5 class="card-title">${obj.bookObject.title}</h5>
+            <p class="card-text bold">${obj.bookObject.sale ? `<span class="badge badge-info sale-badge"><i class="fa fa-bell" aria-hidden="true"></i> Sale</span> $${obj.bookObject.price}` : `$${obj.bookObject.price}`}</p>
+            <hr>
+            <i class="btn btn-success fas fa-eye" id="view-book-btn--${obj.bookObject.firebaseKey}"></i>
+            <i id="edit-book-btn--${obj.bookObject.firebaseKey}" class="fas fa-edit btn btn-info"></i>
+            <i id="delete-book-btn--${obj.bookObject.firebaseKey}" class="btn btn-danger fas fa-trash-alt"></i>
+        </div>
+      </div>
    </div>
   </div>`;
   renderToDOM('#view', domString);
