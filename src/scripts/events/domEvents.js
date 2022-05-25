@@ -1,8 +1,9 @@
 import { deleteSingleAuthor } from '../../api/authorData';
 import { deleteBook } from '../../api/bookData';
-import viewBookDetails from '../../api/mergedData';
+import { viewBookDetails, viewAuthorDetails } from '../../api/mergedData';
 import { showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
+import viewAuthor from '../components/pages/viewAuthors';
 import viewBook from '../components/pages/viewBook';
 
 const domEvents = () => {
@@ -32,7 +33,7 @@ const domEvents = () => {
       viewBookDetails(bookFirebaseKey).then((bookAuthorObject) => viewBook(bookAuthorObject));
     }
 
-    // ADD CLICK EVENT FOR DELETING AN AUTHOR
+    // CLICK EVENT FOR DELETING AN AUTHOR
     if (e.target.id.includes('delete-author-btn')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
@@ -46,6 +47,12 @@ const domEvents = () => {
       console.warn('ADD AUTHOR');
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
+
+    // CLICK EVENT FOR VIEW AUTHOR DETAILS
+    if (e.target.id.includes('view-author-btn')) {
+      const [, authorFirebaseKey] = e.target.id.split('--');
+      viewAuthorDetails(authorFirebaseKey).then((authorBookObject) => viewAuthor(authorBookObject));
+    }
   });
 };
 
