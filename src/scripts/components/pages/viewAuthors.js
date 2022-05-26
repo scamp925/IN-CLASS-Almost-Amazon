@@ -2,7 +2,6 @@ import clearDom from '../../helpers/clearDom';
 import renderToDOM from '../../helpers/renderToDom';
 
 const viewAuthor = (obj) => {
-  console.warn(obj.authorBooksArray);
   clearDom();
   let booksDomString = '';
   obj.authorBooksArray.forEach((book) => {
