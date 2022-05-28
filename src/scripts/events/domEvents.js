@@ -1,6 +1,6 @@
-import { deleteSingleAuthor } from '../../api/authorData';
-import { deleteBook } from '../../api/bookData';
-import { viewBookDetails, viewAuthorDetails } from '../../api/mergedData';
+import { createAuthor, } from '../../api/authorData';
+import { createBook, deleteBook } from '../../api/bookData';
+import { viewBookDetails, viewAuthorDetails, deleteAuthorBooks } from '../../api/mergedData';
 import { showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
 import viewAuthor from '../components/pages/viewAuthors';
@@ -19,7 +19,8 @@ const domEvents = () => {
 
     // TODO: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
-      console.warn('ADD BOOK');
+      const [, firebaseKey] = e.target.id.split('--');
+      createBook(firebaseKey).then(())
     }
 
     // TODO: CLICK EVENT EDITING/UPDATING A BOOK
@@ -33,18 +34,19 @@ const domEvents = () => {
       viewBookDetails(bookFirebaseKey).then((bookAuthorObject) => viewBook(bookAuthorObject));
     }
 
-    // CLICK EVENT FOR DELETING AN AUTHOR
+    // CLICK EVENT FOR DELETING AN AUTHOR AND ALL AUTHOR'S BOOKS
     if (e.target.id.includes('delete-author-btn')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         const [, firebaseKey] = e.target.id.split('--');
-        deleteSingleAuthor(firebaseKey).then((authorsArray) => showAuthors(authorsArray));
+        deleteAuthorBooks(firebaseKey).then((authorsArray) => showAuthors(authorsArray));
       }
     }
 
     // FIXME: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
-      console.warn('ADD AUTHOR');
+      const [, firebaseKey] = e.target.id.split('--');
+      createAuthor(firebaseKey).then()
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
 

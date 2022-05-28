@@ -1,9 +1,20 @@
+import { createBook } from '../../api/bookData';
+import { createAuthor } from '../../api/authorData';
+
 const formEvents = () => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
     if (e.target.id.includes('submit-book')) {
-      console.warn('CLICKED SUBMIT BOOK', e.target.id);
+      const newBookObj = {
+        title: document.querySelector('#title').value,
+        description: document.querySelector('#description').value,
+        image: document.querySelector('#image').value,
+        price: document.querySelector('#price').value,
+        sale: document.querySelector('#sale').value,
+        author_id: document.querySelector('#author_id').value,
+      };
+      createBook(newBookObj).then()
     }
 
     // TODO: CLICK EVENT FOR EDITING A BOOK
@@ -15,7 +26,13 @@ const formEvents = () => {
 
     // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('submit-author')) {
-      console.warn('CLICKED SUBMIT AUTHOR');
+      const newAuthorObj = {
+        firebaseKey: document.querySelector('#submit-author').value,
+        first_name: document.querySelector('#first_name').value,
+        last_name: document.querySelector('#last_name').value,
+        email: document.querySelector('#email').value,
+      };
+      createAuthor(newAuthorObj).then()
     }
     // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
   });
