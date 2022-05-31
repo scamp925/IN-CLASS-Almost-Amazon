@@ -23,7 +23,7 @@ const domEvents = () => {
       addBookForm();
     }
 
-    // TODO: CLICK EVENT EDITING/UPDATING A BOOK
+    // CLICK EVENT EDITING/UPDATING A BOOK
     if (e.target.id.includes('edit-book-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
       // 1. get the book (getSingleBook())
@@ -36,7 +36,7 @@ const domEvents = () => {
       viewBookDetails(bookFirebaseKey).then((bookAuthorObject) => viewBook(bookAuthorObject));
     }
 
-    // CLICK EVENT FOR DELETING AN AUTHOR AND ALL AUTHOR'S BOOKS
+    // CLICK EVENT FOR DELETING AUTHOR AND ALL AUTHOR'S BOOKS
     if (e.target.id.includes('delete-author-btn')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
