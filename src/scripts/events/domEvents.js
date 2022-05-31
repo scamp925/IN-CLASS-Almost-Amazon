@@ -1,8 +1,9 @@
-import { createAuthor, } from '../../api/authorData';
-import { createBook, deleteBook } from '../../api/bookData';
+import { deleteBook } from '../../api/bookData';
 import { viewBookDetails, viewAuthorDetails, deleteAuthorBooks } from '../../api/mergedData';
+import addAuthorForm from '../components/forms/addAuthorForm';
+import addBookForm from '../components/forms/addBookForm';
 import { showAuthors } from '../components/pages/authors';
-import { showBooks } from '../components/pages/books';
+import showBooks from '../components/pages/books';
 import viewAuthor from '../components/pages/viewAuthors';
 import viewBook from '../components/pages/viewBook';
 
@@ -19,8 +20,7 @@ const domEvents = () => {
 
     // TODO: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
-      const [, firebaseKey] = e.target.id.split('--');
-      createBook(firebaseKey).then(())
+      addBookForm();
     }
 
     // TODO: CLICK EVENT EDITING/UPDATING A BOOK
@@ -45,8 +45,7 @@ const domEvents = () => {
 
     // FIXME: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
-      const [, firebaseKey] = e.target.id.split('--');
-      createAuthor(firebaseKey).then()
+      addAuthorForm();
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
 

@@ -9,7 +9,7 @@ const getBooks = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/books.json`)
     .then((response) => {
       if (response.data) {
-        resolve(Object.values(response.data))
+        resolve(Object.values(response.data));
       } else {
         resolve([]);
       }
@@ -45,7 +45,11 @@ const createBook = (newBookObj) => new Promise((resolve, reject) => {
 });
 
 // TODO: UPDATE BOOK
-const updateBook = () => {};
+const updateBook = (bookObject) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/books/${bookObject.firebaseKey}.json`, bookObject)
+    .then(() => getBooks().then(resolve))
+    .catch(reject);
+});
 
 // FILTER BOOKS ON SALE
 const booksOnSale = () => new Promise((resolve, reject) => {

@@ -1,6 +1,6 @@
 import { booksOnSale, getBooks } from '../../api/bookData';
 import signOut from '../helpers/auth/signOut';
-import { showBooks } from '../components/pages/books';
+import showBooks from '../components/pages/books';
 import { favAuthors, getAuthors } from '../../api/authorData';
 import { emptyAuthors, showAuthors } from '../components/pages/authors';
 
