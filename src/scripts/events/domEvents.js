@@ -1,3 +1,4 @@
+import { getSingleAuthor } from '../../api/authorData';
 import { deleteBook, getSingleBook } from '../../api/bookData';
 import { viewBookDetails, viewAuthorDetails, deleteAuthorBooks } from '../../api/mergedData';
 import addAuthorForm from '../components/forms/addAuthorForm';
@@ -51,7 +52,8 @@ const domEvents = () => {
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
     if (e.target.id.includes('update-author')) {
-      addAuthorForm();
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
     }
 
     // CLICK EVENT FOR VIEW AUTHOR DETAILS
