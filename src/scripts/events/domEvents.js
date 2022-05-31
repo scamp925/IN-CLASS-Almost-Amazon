@@ -1,4 +1,4 @@
-import { deleteBook } from '../../api/bookData';
+import { deleteBook, getSingleBook } from '../../api/bookData';
 import { viewBookDetails, viewAuthorDetails, deleteAuthorBooks } from '../../api/mergedData';
 import addAuthorForm from '../components/forms/addAuthorForm';
 import addBookForm from '../components/forms/addBookForm';
@@ -25,7 +25,10 @@ const domEvents = () => {
 
     // TODO: CLICK EVENT EDITING/UPDATING A BOOK
     if (e.target.id.includes('edit-book-btn')) {
-      addBookForm();
+      const [, firebaseKey] = e.target.id.split('--');
+      // 1. get the book (getSingleBook())
+      // 2. pass book object to book form
+      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
     }
     // CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {

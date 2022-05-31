@@ -32,7 +32,7 @@ const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// TODO: CREATE BOOK
+// CREATE BOOK
 const createBook = (newBookObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/books.json`, newBookObj)
     .then((response) => {
@@ -44,7 +44,7 @@ const createBook = (newBookObj) => new Promise((resolve, reject) => {
     }).catch(reject);
 });
 
-// TODO: UPDATE BOOK
+// UPDATE BOOK
 const updateBook = (bookObject) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/books/${bookObject.firebaseKey}.json`, bookObject)
     .then(() => getBooks().then(resolve))
