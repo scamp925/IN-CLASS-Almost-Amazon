@@ -3,7 +3,7 @@ import { deleteBook, getSingleBook } from '../../api/bookData';
 import { viewBookDetails, viewAuthorDetails, deleteAuthorBooks } from '../../api/mergedData';
 import addAuthorForm from '../components/forms/addAuthorForm';
 import addBookForm from '../components/forms/addBookForm';
-import { showAuthors } from '../components/pages/authors';
+import showAuthors from '../components/pages/authors';
 import showBooks from '../components/pages/books';
 import viewAuthor from '../components/pages/viewAuthors';
 import viewBook from '../components/pages/viewBook';
