@@ -8,7 +8,7 @@ import showBooks from '../components/pages/books';
 import viewAuthor from '../components/pages/viewAuthors';
 import viewBook from '../components/pages/viewBook';
 
-const domEvents = () => {
+const domEvents = (uid) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
     // CLICK EVENT FOR DELETING A BOOK
     if (e.target.id.includes('delete-book')) {
@@ -21,7 +21,7 @@ const domEvents = () => {
 
     // CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
-      addBookForm();
+      addBookForm(uid);
     }
 
     // CLICK EVENT EDITING/UPDATING A BOOK
@@ -48,10 +48,10 @@ const domEvents = () => {
 
     // ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
-      addAuthorForm();
+      addAuthorForm(uid);
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
-    if (e.target.id.includes('update-author')) {
+    if (e.target.id.includes('edit-author-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
     }
