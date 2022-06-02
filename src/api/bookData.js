@@ -33,21 +33,21 @@ const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // CREATE BOOK
-const createBook = (uid, newBookObj) => new Promise((resolve, reject) => {
+const createBook = (newBookObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/books.json`, newBookObj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/books/${response.data.name}.json`, body)
         .then(() => {
-          getBooks(uid).then(resolve);
+          getBooks(newBookObj.uid).then(resolve);
         });
     }).catch(reject);
 });
 
 // UPDATE BOOK
-const updateBook = (uid, bookObject) => new Promise((resolve, reject) => {
+const updateBook = (bookObject) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/books/${bookObject.firebaseKey}.json`, bookObject)
-    .then(() => getBooks(uid).then(resolve))
+    .then(() => getBooks(bookObject.uid).then(resolve))
     .catch(reject);
 });
 

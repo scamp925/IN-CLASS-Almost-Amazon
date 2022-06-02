@@ -24,13 +24,13 @@ const getAuthors = (uid) => new Promise((resolve, reject) => {
 // });
 
 // CREATE AUTHOR
-const createAuthor = (uid, newAuthorObj) => new Promise((resolve, reject) => {
+const createAuthor = (newAuthorObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/authors.json`, newAuthorObj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/authors/${response.data.name}.json`, body)
         .then(() => {
-          getAuthors(uid).then(resolve);
+          getAuthors(newAuthorObj.uid).then(resolve);
         });
     }).catch(reject);
 });
@@ -65,9 +65,9 @@ const deleteSingleAuthor = (uid, firebaseKey) => new Promise((resolve, reject) =
 });
 
 // UPDATE AUTHOR
-const updateAuthor = (uid, authorObj) => new Promise((resolve, reject) => {
+const updateAuthor = (authorObj) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/authors/${authorObj.firebaseKey}.json`, authorObj)
-    .then(() => getAuthors(uid).then(resolve))
+    .then(() => getAuthors(authorObj.uid).then(resolve))
     .catch(reject);
 });
 
