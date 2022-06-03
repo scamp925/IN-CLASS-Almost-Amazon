@@ -29,7 +29,7 @@ const domEvents = (uid) => {
       const [, firebaseKey] = e.target.id.split('--');
       // 1. get the book (getSingleBook())
       // 2. pass book object to book form
-      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
+      getSingleBook(firebaseKey).then((bookObj) => addBookForm(uid, bookObj));
     }
     // CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {
