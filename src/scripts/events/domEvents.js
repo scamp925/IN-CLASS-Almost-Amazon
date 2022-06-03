@@ -15,7 +15,7 @@ const domEvents = (uid) => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         const [, firebaseKey] = e.target.id.split('--');
-        deleteBook(firebaseKey).then((booksArray) => showBooks(booksArray));
+        deleteBook(uid, firebaseKey).then((booksArray) => showBooks(booksArray));
       }
     }
 
@@ -29,12 +29,12 @@ const domEvents = (uid) => {
       const [, firebaseKey] = e.target.id.split('--');
       // 1. get the book (getSingleBook())
       // 2. pass book object to book form
-      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj.uid));
+      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
     }
     // CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {
       const [, bookFirebaseKey] = e.target.id.split('--');
-      viewBookDetails(bookFirebaseKey).then((bookAuthorObject) => viewBook(bookAuthorObject.uid));
+      viewBookDetails(bookFirebaseKey).then((bookAuthorObject) => viewBook(bookAuthorObject));
     }
 
     // CLICK EVENT FOR DELETING AUTHOR AND ALL AUTHOR'S BOOKS

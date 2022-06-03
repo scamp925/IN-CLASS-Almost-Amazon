@@ -20,7 +20,7 @@ const getBooks = (uid) => new Promise((resolve, reject) => {
 const deleteBook = (uid, firebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/books/${firebaseKey}.json`)
     .then(() => {
-      getBooks(uid).then((booksArray) => resolve(booksArray.uid));
+      getBooks(uid).then((booksArray) => resolve(booksArray));
     })
     .catch((error) => reject(error));
 });

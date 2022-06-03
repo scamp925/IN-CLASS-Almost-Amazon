@@ -21,12 +21,12 @@ const viewAuthorDetails = (authorFirebaseKey) => new Promise((resolve, reject) =
     }).catch((error) => reject(error));
 });
 
-const deleteAuthorBooks = (authorId) => new Promise((resolve, reject) => {
+const deleteAuthorBooks = (uid, authorId) => new Promise((resolve, reject) => {
   getAuthorBooks(authorId).then((booksArray) => {
     const deleteBookPromise = booksArray.map((book) => deleteBook(book.firebaseKey));
 
     Promise.all(deleteBookPromise).then(() => {
-      deleteSingleAuthor(authorId).then(resolve);
+      deleteSingleAuthor(uid, authorId).then(resolve);
     });
   }).catch(reject);
 });
