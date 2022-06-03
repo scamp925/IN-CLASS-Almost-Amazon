@@ -1,9 +1,9 @@
 import { createBook, updateBook } from '../../api/bookData';
 import { createAuthor, updateAuthor } from '../../api/authorData';
 import showBooks from '../components/pages/books';
-import { showAuthors } from '../components/pages/authors';
+import showAuthors from '../components/pages/authors';
 
-const formEvents = () => {
+const formEvents = (uid) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     // CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
@@ -15,6 +15,7 @@ const formEvents = () => {
         price: document.querySelector('#price').value,
         sale: document.querySelector('#sale').checked,
         author_id: document.querySelector('#author_id').value,
+        uid,
       };
       createBook(newBookObj).then((booksArray) => showBooks(booksArray));
     }
@@ -29,7 +30,8 @@ const formEvents = () => {
         price: document.querySelector('#price').value,
         sale: document.querySelector('#sale').checked,
         author_id: document.querySelector('#author_id').value,
-        firebaseKey
+        firebaseKey,
+        uid,
       };
       updateBook(updatedBookObj).then(showBooks);
     }
@@ -37,11 +39,11 @@ const formEvents = () => {
     // ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('submit-author')) {
       const newAuthorObj = {
-        firebaseKey: document.querySelector('#submit-author').value,
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
         favorite: document.querySelector('#favorite').checked,
+        uid,
       };
       createAuthor(newAuthorObj).then((authorArray) => showAuthors(authorArray));
     }
@@ -54,6 +56,7 @@ const formEvents = () => {
         email: document.querySelector('#email').value,
         favorite: document.querySelector('#favorite').checked,
         firebaseKey,
+        uid,
       };
       updateAuthor(updatedAuthorObj).then(showAuthors);
     }

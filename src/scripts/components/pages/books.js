@@ -2,7 +2,7 @@ import clearDom from '../../helpers/clearDom';
 import renderToDOM from '../../helpers/renderToDom';
 
 const emptyBooks = () => {
-  document.querySelector('#store').innerHTML = '<h1>No Items</h1>';
+  document.querySelector('#store').innerHTML = '<h1>Ready for Your Books</h1>';
 };
 
 const showBooks = (array) => {

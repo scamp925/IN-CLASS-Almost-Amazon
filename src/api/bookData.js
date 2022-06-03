@@ -5,8 +5,8 @@ import firebaseConfig from './apiKeys';
 const dbUrl = firebaseConfig.databaseURL;
 
 // GET BOOKS
-const getBooks = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/books.json`)
+const getBooks = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/books.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => {
       if (response.data) {
         resolve(Object.values(response.data));
@@ -17,10 +17,10 @@ const getBooks = () => new Promise((resolve, reject) => {
 });
 
 // DELETE BOOK
-const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
+const deleteBook = (uid, firebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/books/${firebaseKey}.json`)
     .then(() => {
-      getBooks().then((booksArray) => resolve(booksArray));
+      getBooks(uid).then((booksArray) => resolve(booksArray));
     })
     .catch((error) => reject(error));
 });
@@ -39,7 +39,7 @@ const createBook = (newBookObj) => new Promise((resolve, reject) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/books/${response.data.name}.json`, body)
         .then(() => {
-          getBooks().then(resolve);
+          getBooks(newBookObj.uid).then(resolve);
         });
     }).catch(reject);
 });
@@ -47,14 +47,17 @@ const createBook = (newBookObj) => new Promise((resolve, reject) => {
 // UPDATE BOOK
 const updateBook = (bookObject) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/books/${bookObject.firebaseKey}.json`, bookObject)
-    .then(() => getBooks().then(resolve))
+    .then(() => getBooks(bookObject.uid).then(resolve))
     .catch(reject);
 });
 
 // FILTER BOOKS ON SALE
-const booksOnSale = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/books.json?orderBy="sale"&equalTo=true`)
-    .then((response) => resolve(Object.values(response.data)))
+const booksOnSale = (uid) => new Promise((resolve, reject) => {
+  getBooks(uid)
+    .then((userBooks) => {
+      const onSale = userBooks.filter((book) => book.sale);
+      resolve(onSale);
+    })
     .catch((error) => reject(error));
 });
 
