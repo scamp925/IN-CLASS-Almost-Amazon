@@ -29,12 +29,12 @@ const domEvents = (uid) => {
       const [, firebaseKey] = e.target.id.split('--');
       // 1. get the book (getSingleBook())
       // 2. pass book object to book form
-      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
+      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj.uid));
     }
     // CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {
       const [, bookFirebaseKey] = e.target.id.split('--');
-      viewBookDetails(bookFirebaseKey).then((bookAuthorObject) => viewBook(bookAuthorObject));
+      viewBookDetails(bookFirebaseKey).then((bookAuthorObject) => viewBook(bookAuthorObject.uid));
     }
 
     // CLICK EVENT FOR DELETING AUTHOR AND ALL AUTHOR'S BOOKS
@@ -53,13 +53,13 @@ const domEvents = (uid) => {
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
     if (e.target.id.includes('edit-author-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
-      getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
+      getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj.uid));
     }
 
     // CLICK EVENT FOR VIEW AUTHOR DETAILS
     if (e.target.id.includes('view-author-btn')) {
       const [, authorFirebaseKey] = e.target.id.split('--');
-      viewAuthorDetails(authorFirebaseKey).then((authorBookObject) => viewAuthor(authorBookObject));
+      viewAuthorDetails(authorFirebaseKey).then((authorBookObject) => viewAuthor(authorBookObject.uid));
     }
   });
 };
